@@ -11,7 +11,7 @@ using namespace std;
 
 
 // -> Fixed numbers based on TN automotive sales tax which is 7%.
-const double salesTax = 0.07; // 7
+const double salesTax = 0.07; // 7%
 
 // -> Fixed interest rates to be compounded monthly according to local bank: 
 const double interestRateTwelveMonths = 0.0899; // 8.99% / 100
@@ -48,16 +48,7 @@ int main() {
     } else if(loanTerm == 60) {
         interestRate = interestRateSixtyMonths;
     } 
-
-    // Verify if the down payment and the price is not = if it is print a message that says you don't have a monthly payment.
-    if(carPrice == downPayment) {
-        cout << "You don't have a monthly payment as you paid off the car.";
-    }
-
-    if(carPrice or downPayment < 0) {
-        cout << "The price of the car or the payment you put down is a negative value.";
-    }
-
+    
     // -> Calculate the following:
     const double loanPrincipal = carPrice - downPayment;
 

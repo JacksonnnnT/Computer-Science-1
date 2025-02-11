@@ -13,13 +13,19 @@ Description: This file allows a user to play blackjack.
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cstring>
+#include <cmath> // Surprise tool that'll help us later.
 using std::cout;
 using std::cin;
 using std::endl;
 using std::rand;
 using std::srand;
+using std::string;
 
-// Global Declarations
+// Arrays:
+string suites[4] = { "Clubs", "Diamonds", "Hearts", "Spades" };
+string faceCards[4] = { "King", "Queen", "Jack", "Ace" };
+int randomIndex = rand() % 4;
 
 int min = 1, max = 21;
 
@@ -33,6 +39,7 @@ int main() {
     char wishToPlay;
     int dealerCards;
     int playerCards;
+    int randomIdx;
     int chips = 500;
     int bet;
 
@@ -42,7 +49,7 @@ int main() {
    
 
     if(wishToPlay == 'y') { // Verify the character.
-         cout << "You were gifted " << chips << " chips from the developers to have fun with!\n";
+         cout << "You were gifted " << chips << " chips!\n";
         randomNumber = min + rand() % (max - min + 1); // Get a random number.
         dealerCards = randomNumber; // Assign to the variable.
         playerCards = randomNumber;
@@ -58,7 +65,7 @@ int main() {
         }
 
         // Print the cards and ask for the user's next move.
-        cout << "You bet " << bet << " chips" << "\nYour first card is a: " << playerCards  << "\n The Dealer's first card is a: " << dealerCards  << "\n What is your first move (H) Hit or (S) Stand? ";
+        cout << "You bet " << bet << " chips" << "\nYour first card is a: " << playerCards << "of " << suites[randomIndex]  << "\n The Dealer's first card is a: " << dealerCards  << "\n What is your first move (H) Hit or (S) Stand? ";
         cin >> userMove;   
 
         // Check if the user decided to hit.
@@ -66,13 +73,14 @@ int main() {
         if(userMove == 'h' or "H") {
             randomNumber = min + rand() % (max - min + 1);
             playerCards = playerCards + randomNumber;
-            dealerCards = dealerCards;
+            dealerCards = dealerCards + randomNumber; 
+
     
             if(playerCards > 21) { // If player cards are over 21. Could probably make a function that checks this.
                 cout << "You busted! You went over 21! Your card total was " << playerCards;
                 exit(true);
             } else {
-                cout << "Your second card is a: " << playerCards << "The dealer's card's are: " << dealerCards << "\n What is your next move? (H) Hit or (S) stand? ";
+                cout << "Your second card is a: " << playerCards << "\nThe dealer's card's are: " << dealerCards << "\n What is your next move? (H) Hit or (S) stand? ";
                 cin >> userMove; 
             }
         } 
@@ -80,11 +88,10 @@ int main() {
 
         if(userMove == 's' or "S") {
             randomNumber = min + rand() % (max - min + 1);
-            playerCards = playerCards;
             dealerCards = dealerCards + randomNumber;
-
             if(dealerCards > 21) {
-                cout << "Dealer went over 21! The card total for the dealer was " << dealerCards << " you win!";
+                chips = bet * 2;
+                cout << "Dealer went over 21! The card total for the dealer was " << dealerCards << " you win: " << bet * 2 << " chips have been awarded.";
             } else {
                 cout << "The dealer's second card total is a: " << dealerCards << "\n What is your next move? Hit (H) or Stand (S)";
                 cin >> userMove;

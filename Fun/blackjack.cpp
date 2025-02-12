@@ -15,6 +15,7 @@ Description: This file allows a user to play blackjack.
 #include <ctime>
 #include <cstring>
 #include <cmath> // Surprise tool that'll help us later.
+#include "blackjackFunctions.h" // Crappy functions used for blackjack that I designed.
 using std::cout;
 using std::cin;
 using std::endl;
@@ -22,90 +23,47 @@ using std::rand;
 using std::srand;
 using std::string;
 
-// Arrays:
-string suites[4] = { "Clubs", "Diamonds", "Hearts", "Spades" };
-string faceCards[4] = { "King", "Queen", "Jack", "Ace" };
-int randomIndex = rand() % 4;
-
-int min = 1, max = 21;
-
 int main() {
-    // Necessary game functions:
-    srand(time(0)); // Seeds the random number generator.
-    int randomNumber = min + rand() % (max - min + 1);
+    // Seed them generators:
+    srand(time(0));
 
-    int blackjack = 21;
     char userMove;
     char wishToPlay;
-    int dealerCards;
-    int playerCards;
-    int randomIdx;
+    int dealerCards = 0;
+    int playerCards = 0;
     int chips = 500;
     int bet;
 
     // Print welcome and ask if they wish to play.
     cout << "Welcome to blackjack, do you want to play? ";
     cin >> wishToPlay; // Get user input.
-   
 
-    if(wishToPlay == 'y') { // Verify the character.
-         cout << "You were gifted " << chips << " chips!\n";
-        randomNumber = min + rand() % (max - min + 1); // Get a random number.
-        dealerCards = randomNumber; // Assign to the variable.
-        playerCards = randomNumber;
+    // Print the first card and ask the user for their next move.
+    if(wishToPlay == 'y' or 'Y') {
+    int randomCardPlayer = giveCardPlayer();
+    int randomCardDealer = giveCardDealer();
+    cout << "Your first card is a: " << giveCardPlayer() << " of " << randomSuite() << "\nThe dealer's first card is a: " << giveCardDealer() << " of " << randomSuite() << "\nWhat is your first move? (H) Hit or (S) Stand (Terminate with Q): ";
+    playerCards = playerCards += randomCardPlayer;
+    dealerCards = dealerCards += randomCardDealer;
+    cin >> userMove;
 
-        // Ask the user for a bet.
-        cout << "You need to bet before we get started. You can bet up to " << chips << " amount: ";
-        cin >> bet;
-        
-        // Check if bet does not exceed user's chipset amount.
-        if (bet > chips) {
-            cout << "You can't bet more than you have already.";
-            exit(true);
-        }
-
-        // Print the cards and ask for the user's next move.
-        cout << "You bet " << bet << " chips" << "\nYour first card is a: " << playerCards << "of " << suites[randomIndex]  << "\n The Dealer's first card is a: " << dealerCards  << "\n What is your first move (H) Hit or (S) Stand? ";
-        cin >> userMove;   
-
-        // Check if the user decided to hit.
-        // todo: Make a stand check, and return all other characters if characters do not = h or s.
-        if(userMove == 'h' or "H") {
-            randomNumber = min + rand() % (max - min + 1);
-            playerCards = playerCards + randomNumber;
-            dealerCards = dealerCards + randomNumber; 
-
-    
-            if(playerCards > 21) { // If player cards are over 21. Could probably make a function that checks this.
-                cout << "You busted! You went over 21! Your card total was " << playerCards;
-                exit(true);
-            } else {
-                cout << "Your second card is a: " << playerCards << "\nThe dealer's card's are: " << dealerCards << "\n What is your next move? (H) Hit or (S) stand? ";
-                cin >> userMove; 
-            }
-        } 
-
-
-        if(userMove == 's' or "S") {
-            randomNumber = min + rand() % (max - min + 1);
-            dealerCards = dealerCards + randomNumber;
-            if(dealerCards > 21) {
-                chips = bet * 2;
-                cout << "Dealer went over 21! The card total for the dealer was " << dealerCards << " you win: " << bet * 2 << " chips have been awarded.";
-            } else {
-                cout << "The dealer's second card total is a: " << dealerCards << "\n What is your next move? Hit (H) or Stand (S)";
+    do {
+     
+            switch(userMove) {
+                case 'H':
+                case 'h':
+                playerCards = playerCards += randomCardPlayer;
+                dealerCards = dealerCards += randomCardDealer;
+                cout << "Your next card is a: " << randomCardPlayer << " of " << randomSuite() << "\nThe dealer's second card is a: " << randomCardDealer << "\nYour total cards are: " << playerCards << "\n" << "What is your next move? (H) Hit or (S) Stand (Terminate with Q): ";
+                checkBlackjack(playerCards, dealerCards);
                 cin >> userMove;
-            } 
-        }
-
-
-        
-
-    } else {
-        cout << "Invalid character was entered, you entered: " << userMove << " womp womp!";
-        return 0;
+                break;
+                case 's':
+                case 'S':
+                cout << "You stand. The dealer's next card is a: " << randomCardDealer << randomSuite();
+                break;
+            }
+    } while (userMove != 'Q');
     }
-    
-
 }
 

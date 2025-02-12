@@ -18,12 +18,12 @@ int main() {
   cout << "What is your base pay? "; // Ask user for their payrate.
   cin >> rate; // Get their pay.
   
-  if(hours > 40) {
+  if(hours > 40) { // If hours is greater than 40, we need to calculate overtime as well.
   salary = rate * 40 + (hours - 40) * rate * 1.5;
   cout << "Salary is $" << salary << endl;
   cout << "Enter hours (0 to end): "; // Keep asking user for hours.
   cin >> hours;
- } else {
+ } else { // Print the hours * rate.
   salary = hours * rate;
   cout << "Salary is $" << salary << endl;
   cout << "Enter hours (0 to end): ";

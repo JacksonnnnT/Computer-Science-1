@@ -18,16 +18,17 @@ int main() {
  cin >> number;
 
  // Result.
- int result = 1;
+ double result = 1;
 
  for (int i = 1; i <= number; i++) { // Loop and increment
  result *= i; // Update the result.
  } 
 
  // Print the result.
- cout << number << "! " << "is " << result << endl;
+ cout << number << "! " << "is " << fixed;
+ cout.precision(0); // Handle large integers.
+ cout << result << endl;
 
-
-
+ return 0;
 
 }

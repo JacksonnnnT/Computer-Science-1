@@ -10,11 +10,12 @@ using namespace std;
 int main() {
     char choice; // The user's choice for flooring.
 
-    // Print and ask user for input.
-    cout << "H - Hardwood\nL - Laminate\nE - Engineered Hardwood\nQ - Quit\nChoice: ";
-    cin >> choice;    
 
     do {
+       // Print and ask user for input.
+        cout << "H - Hardwood\nL - Laminate\nE - Engineered Hardwood\nQ - Quit\nChoice: ";
+        cin >> choice;    
+
         switch(choice) { // Switch case for each choice.
         case 'H':
         case 'h':
@@ -27,18 +28,13 @@ int main() {
         case 'E':
         case 'e':
         cout << "You ordered Engineered Hardwood." << endl;
+        case 'Q':
+        case 'q':
         break;
-        default: 
-        cout << "Invalid choice: " << choice << endl;
+        default:
+        cout << "Invalid character provided, you entered: " << choice << "\n";
+        break;
         }
-        // Keep printing and asking for types of flooring.
-        cout << "H - Hardwood\nL - Laminate\nE - Engineered Hardwood\nQ - Quit\nChoice: ";
-         cin >> choice;    
-
-
-        
-
-    } while (choice != 'Q'); // While the user's choice does not equal the terminating value 'Q'.
-
-return 0;
+    } while (choice != 'Q' && choice != 'q'); // While the user's choice does not equal the terminating value 'Q'.
+    return 0;
 }

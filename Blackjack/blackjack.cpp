@@ -16,6 +16,7 @@ Description: This file allows a user to play blackjack.
 #include <cstring>
 #include <cmath> // Surprise tool that'll help us later.
 #include "blackjackFunctions.h" // Crappy functions used for blackjack that I designed.
+#include "gameHandling.h"
 using std::cout;
 using std::cin;
 using std::endl;
@@ -54,8 +55,11 @@ int main() {
                 case 'h':
                 playerCards = playerCards += randomCardPlayer;
                 dealerCards = dealerCards += randomCardDealer;
-                cout << "Your next card is a: " << randomCardPlayer << " of " << randomSuite() << "\nThe dealer's second card is a: " << randomCardDealer << "\nYour total cards are: " << playerCards << "\n" << "What is your next move? (H) Hit or (S) Stand (Terminate with Q): ";
+                cout << "Your next card is a: " << randomCardPlayer << " of " << randomSuite() << "\nThe dealer's next card is a: " << randomCardDealer << "\nYour total cards are: " << playerCards << "\n" << "What is your next move? (H) Hit or (S) Stand (Terminate with Q): ";
                 checkBlackjack(playerCards, dealerCards);
+                checkBlackjack();
+                checkBust(playerCards, dealerCards);
+                checkBust();
                 cin >> userMove;
                 break;
                 case 's':
@@ -63,6 +67,7 @@ int main() {
                 cout << "You stand. The dealer's next card is a: " << randomCardDealer << randomSuite();
                 break;
             }
+
     } while (userMove != 'Q');
     }
 }

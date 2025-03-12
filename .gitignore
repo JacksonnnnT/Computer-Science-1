@@ -1,2 +1,6 @@
 # VS Code
-/.vscode
+.vscode/
+
+# Unnecessary files.
+a.out
+Blackjack/

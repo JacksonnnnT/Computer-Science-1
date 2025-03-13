@@ -4,3 +4,7 @@
 # Unnecessary files.
 a.out
 Blackjack/
+
+
+# DS Store
+.DS_Store

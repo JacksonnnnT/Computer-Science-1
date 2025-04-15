@@ -4,6 +4,7 @@
 # Unnecessary files.
 a.out
 Blackjack/
+Labs/ 
 
 # Classwork files to not show
 Classwork/Pair\ Programming\ 10/

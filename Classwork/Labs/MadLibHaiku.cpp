@@ -1,5 +1,5 @@
 /*
-Jackson T. Napier
+Jackson 
 MadLibHaiku.cpp
 This program launches a game of "Mad Libs".
 

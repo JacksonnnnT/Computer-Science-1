@@ -5,6 +5,9 @@
 a.out
 Blackjack/
 
+# Classwork files to not show
+Classwork/Pair\ Programming\ 10/
+
 
 # DS Store
 .DS_Store

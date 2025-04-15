@@ -39,10 +39,10 @@ int main() {
 void figureIt(double number, bool& divisible, char& sign, int& intPart) {
   int checkEven = (static_cast<int>(number) % 2);
   if(checkEven) {
-  divisible = true;
-} else {
-  divisible = false;
-}
+    divisible = true;
+  } else {
+    divisible = false;
+  }
 if(number < 0.00) {
  sign = '-';
 } else {
